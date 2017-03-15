@@ -1,1 +1,3 @@
-configs_vagrant
+# Configurations vagrant
+
+Différentes configurations pour mes machines virtuelles vagrant
