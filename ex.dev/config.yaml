@@ -19,15 +19,18 @@ vagrantfile:
                         check_guest_tools: 0
                         update_guest_tools: 0
                 machines:
-                    vflm_n522ytcwtotd:
-                        id: local.lab
-                        hostname: local.lab
+                    vflm_pzdtbcm6fpfa:
+                        id: ex.dev
+                        hostname: ex.dev
                         network:
-                            private_network: 192.168.56.103
+                            private_network: 192.168.56.104
                             forwarded_port:
-                                vflmnfp_3xfik4aiqjnm:
-                                    host: '7192'
+                                vflmnfp_g3xh61sptipd:
+                                    host: '7209'
                                     guest: '22'
+                                vflmnfp_gwlwebhi6un2:
+                                    host: '4444'
+                                    guest: '4000'
                         memory: '1024'
                         cpus: '1'
         provision:
@@ -40,11 +43,11 @@ vagrantfile:
                     - '--verbose'
                     - '--hiera_config /vagrant/puphpet/puppet/hiera.yaml'
         synced_folder:
-            vflsf_7vks0fvmt4bu:
+            vflsf_enqnhc9serv4:
                 owner: www-data
                 group: www-data
-                source: ~/Sites/local.dev
-                target: /var/www/local.lab
+                source: /Users/bastien/Sites/ex.dev
+                target: /var/www/ex.dev
                 sync_type: default
                 smb:
                     smb_host: ''
@@ -115,7 +118,7 @@ cron:
     install: '1'
     jobs: {  }
 nginx:
-    install: '1'
+    install: '0'
     settings:
         version: present
         default_vhost: 1
@@ -127,17 +130,17 @@ nginx:
         names_hash_bucket_size: 128
     upstreams: {  }
     vhosts:
-        nxv_z2lk7jxoje4i:
-            server_name: local.lab
+        nxv_zw9uxp4f6dt0:
+            server_name: awesome.dev
             server_aliases:
-                - local.lab
-            www_root: /var/www/local.lab
+                - www.awesome.dev
+            www_root: /var/www/awesome
             listen_port: '80'
             client_max_body_size: 1m
             ssl: '0'
             locations:
-                nxvl_gmzf9iovqfew:
-                    www_root: /var/www/local.lab
+                nxvl_zpcwkgvddqfs:
+                    www_root: /var/www/awesome/web
                     location: /
                     autoindex: 'off'
                     internal: 'false'
@@ -155,7 +158,7 @@ nginx:
                     fastcgi_split_path: ''
                     proxy: ''
                     proxy_redirect: ''
-                nxvl_xf1vbob9yfu2:
+                nxvl_qlxi0kwtprit:
                     www_root: /var/www/awesome/web
                     location: '~ ^/(app_dev|config)\.php(/|$)'
                     autoindex: 'off'
@@ -174,7 +177,7 @@ nginx:
                         - '$path_info $fastcgi_path_info'
                     proxy: ''
                     proxy_redirect: ''
-                nxvl_l8n8sdwt8ef7:
+                nxvl_5she7z5nnr2o:
                     www_root: /var/www/awesome/web
                     location: '~ ^/index\.php(/|$)'
                     autoindex: 'off'
@@ -192,7 +195,7 @@ nginx:
                         - '$path_info $fastcgi_path_info'
                     proxy: ''
                     proxy_redirect: ''
-                nxvl_1h0or4hotmpe:
+                nxvl_q1vjxpivl1r1:
                     www_root: /var/www/awesome/web
                     location: '~ ^/app\.php(/|$)'
                     autoindex: 'off'
@@ -226,7 +229,7 @@ apache:
         - proxy_fcgi
         - rewrite
     vhosts:
-        av_3lyj6z7nyqbs:
+        av_dnq3hpalejss:
             servername: awesome.dev
             serveraliases:
                 - www.awesome.dev
@@ -243,7 +246,7 @@ apache:
             ssl_protocol: ''
             ssl_cipher: ''
             directories:
-                avd_3657r4xagvzb:
+                avd_7d9h0628lnod:
                     path: /var/www/awesome/web
                     directoryindex: 'index.php app.dev'
                     options:
@@ -257,21 +260,21 @@ apache:
                     custom_fragment: ''
                     provider: directory
             files_match:
-                avfm_v29y5yagnc0h:
+                avfm_8qhq1icmlm1i:
                     path: (app_dev|config)\.php$
                     sethandler: 'proxy:fcgi://127.0.0.1:9000'
                     setenv:
                         - 'APP_ENV dev'
                     custom_fragment: ''
                     provider: filesmatch
-                avfm_vyy9v79l95m8:
+                avfm_v71h5cjzc4oe:
                     path: app\.php$
                     sethandler: 'proxy:fcgi://127.0.0.1:9000'
                     setenv:
                         - 'APP_ENV prod'
                     custom_fragment: ''
                     provider: filesmatch
-                avfm_kgps8gcl16lh:
+                avfm_ovliud0raqly:
                     path: \.php$
                     sethandler: 'proxy:fcgi://127.0.0.1:9000'
                     custom_fragment: ''
@@ -283,7 +286,7 @@ letsencrypt:
         webserver_service: ''
     domains: {  }
 php:
-    install: '1'
+    install: '0'
     settings:
         version: '7.1'
     modules:
@@ -301,7 +304,7 @@ php:
     fpm_ini:
         error_log: /var/log/php-fpm.log
     fpm_pools:
-        phpfp_w9nw04kn9ejv:
+        phpfp_g03vgnb03v26:
             ini:
                 prefix: www
                 listen: '127.0.0.1:9000'
@@ -311,7 +314,7 @@ php:
     composer: '1'
     composer_home: ''
 xdebug:
-    install: '1'
+    install: '0'
     settings:
         xdebug.default_enable: '1'
         xdebug.remote_autostart: '0'
@@ -344,7 +347,7 @@ drush:
 ruby:
     install: '1'
     versions:
-        rv_arphn7kh265a:
+        rv_i35b9lqtpkcq:
             default: '1'
             bundler: '1'
             version: 2.3.1
@@ -362,14 +365,25 @@ nodejs:
         version: '7'
     npm_packages: {  }
 mariadb:
-    install: '1'
+    install: '0'
     settings:
         version: '10.1'
-        root_password: root
+        root_password: '123'
         override_options: {  }
-    users: {  }
-    databases: {  }
-    grants: {  }
+    users:
+        mariadbnu_n2nxedl1bkls:
+            name: dbuser
+            password: '123'
+    databases:
+        mariadbnd_hwlgijhihrem:
+            name: dbname
+            sql: ''
+    grants:
+        mariadbng_3ea6r9cuq3ya:
+            user: dbuser
+            table: '*.*'
+            privileges:
+                - ALL
 mysql:
     install: '0'
     settings:
@@ -377,27 +391,27 @@ mysql:
         root_password: '123'
         override_options: {  }
     users:
-        mysqlnu_mkbjgubfpilm:
+        mysqlnu_cit4l05me04e:
             name: dbuser
             password: '123'
     databases:
-        mysqlnd_vus88hwrab9q:
+        mysqlnd_v6p3hewtj7qs:
             name: dbname
             sql: ''
     grants:
-        mysqlng_6sd6vz0kvhtf:
+        mysqlng_8noi7zmb2kbc:
             user: dbuser
             table: '*.*'
             privileges:
                 - ALL
 postgresql:
-    install: '0'
+    install: '1'
     settings:
         global:
             encoding: UTF8
             version: '9.6'
         server:
-            postgres_password: '123'
+            postgres_password: root
     databases: {  }
     users: {  }
     grants: {  }
@@ -448,7 +462,7 @@ elastic_search:
         version: 2.3.1
         java_install: true
     instances:
-        esi_xs327j5tcs1a:
+        esi_gq7bp7q3s2dz:
             name: es-01
 solr:
     install: '0'
